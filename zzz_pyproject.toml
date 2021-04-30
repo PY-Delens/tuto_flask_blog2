@@ -2,7 +2,7 @@
 name = "tuto_flask_blog2"
 version = "0.1.0"
 description = ""
-authors = ["PY Delens <pydelens@gmail.com>"]
+authors = ["PYD - Linterfaces"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
