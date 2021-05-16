@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    {% block head %}
+    <title>{% block title %}- Flaskr{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='w3.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='LTF_2021a.css') }}"> {% endblock %}
+</head>
+
+<body>
+    <nav>
+        <h1>nav :</h1> (from BaseTPL)
+        <ul>
+            <li><span>blaaaasssss</span>
+                <li><a>bleeeeeeekkkkkkkkkkk</a>
+        </ul>
+    </nav>
+
+
+
+
+    <p>justparamplace : {{justparamplace}} - - - </p>
+
+
+    <p>the typeof MLB_team variable is : {% if MLB_team %} {{type(MLB_team)}} {% else %} [ unavailable info :-/ ] {% endif %}
+    </p>
+
+    <section class="content">
+        <header>
+            <h1> {{ self.title() }}-- header H1 suffix, hardcoded from base</h1>
+            global parent header just before child's content block <br/> self.title() : coded in base but var coming from justindex(self)
+        </header>
+
+        <div id="content">
+            {% block content %} and here the content {% endblock %}
+        </div>
+    </section>
+    <hr>
+    <div id="sectionfooter">
+        {% include 'justwebsite1/sectionfooter.html' %}
+    </div>
+    <div id="globfooter">
+        {% block globfooter %} &copy; Copyright 2021 by <a href="http://domain.invalid/">Lienterfaces / PYD</a>. {% endblock %}
+    </div>
+</body>
+
+</html>

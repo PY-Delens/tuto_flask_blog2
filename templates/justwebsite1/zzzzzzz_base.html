@@ -1,0 +1,24 @@
+{# commentcommentcomment from just #}
+<!doctype html>
+<head>
+    {% block head %}
+<title>{% block title %}localTitle inline{% endblock %} - Flaskr</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% endblock %}
+</head>
+
+<nav>
+  <h1>nav</h1>
+  <ul>
+
+      <li><span>blaaaasssss</span>
+      <li><a>bleeeeeee</a>
+  </ul>
+</nav>
+<section class="content">
+  <header>
+    header block
+  </header>
+  {% block content %}and here the content{% endblock %}
+</section>
+

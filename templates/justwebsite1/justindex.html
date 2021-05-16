@@ -1,0 +1,20 @@
+{# commentcomment #}
+{% extends 'base.html' %}
+{% block Titre %}
+    MonTitre (dansjustindex.html)
+{% endblock %}
+
+{% block header %}
+  <h1>  {% block title %}
+            Title dans local justindex - localTitle inline
+    {% endblock %}
+    Posts  header block
+  </h1>
+{% endblock %}
+
+{% block content %}
+  {% for n in [2,4,16] %}
+    <div class="flash">n = {{n}}</div>
+  {% endfor %}
+{% endblock %}
+
