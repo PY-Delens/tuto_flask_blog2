@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN pip install poetry
 
-ADD pyproject.toml poetry.lock hello.py projectsheet.txt /app/
+ADD pyproject.toml poetry.lock hello.py hello2.py just.py projectsheet.txt /app/
 
 RUN poetry install
 
