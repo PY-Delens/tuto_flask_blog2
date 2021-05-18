@@ -8,7 +8,8 @@ ADD pyproject.toml poetry.lock hello.py projectsheet.txt /app/
 
 RUN poetry install
 
-ENV FLASK_APP=hello:app
+# ENV FLASK_APP=hello:app
+ENV FLASK_APP=just:app
 
 EXPOSE 80
 
