@@ -10,7 +10,7 @@ COPY static/ /app/static/
 COPY templates/ /app/templates/
 
 RUN poetry install
-RUN  ls -la /templates/*
+RUN  ls -la /app/templates/*
 
 # ENV FLASK_APP=hello:app  , not justwebsite1 either
 ENV FLASK_APP=just:app
