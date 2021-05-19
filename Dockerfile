@@ -6,8 +6,8 @@ RUN pip install poetry
 
 ADD pyproject.toml poetry.lock hello.py hello2.py just.py projectsheet.txt /app/
 
-COPY static/ /static/
-COPY templates/ /templates/
+COPY static/ /app/static/
+COPY templates/ /app/templates/
 
 RUN poetry install
 RUN  ls -la /templates/*
