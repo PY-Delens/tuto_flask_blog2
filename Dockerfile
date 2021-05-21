@@ -6,7 +6,7 @@ RUN pip install poetry
 
 ADD pyproject.toml poetry.lock hello.py hello2.py just.py projectsheet.txt /app/
 
-COPY hello.py /app/
+COPY helloblog.py /app/
 COPY static/ /app/static/
 COPY templates/ /app/templates/
 
@@ -21,7 +21,7 @@ RUN sleep 3
 RUN echo hello world
 
 # ENV FLASK_APP=hello:app  , not justwebsite1 either
-ENV FLASK_APP=h:app
+ENV FLASK_APP=helloblog:app
 
 EXPOSE 80
 
