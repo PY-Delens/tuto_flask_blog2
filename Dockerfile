@@ -6,7 +6,7 @@ RUN pip install poetry
 
 ADD pyproject.toml poetry.lock hello.py hello2.py just.py projectsheet.txt /app/
 
-COPY helloblog.py /app/
+COPY helloblog.py schema.sql init_db.py database.db sqlite3 /app/
 COPY static/ /app/static/
 COPY templates/ /app/templates/
 
