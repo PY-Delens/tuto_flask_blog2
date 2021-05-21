@@ -1,20 +1,18 @@
-{# commentcomment #}
-{% extends 'base.html' %}
-{% block Titre %}
-    MonTitre (dansjustindex.html)
-{% endblock %}
+{# commentcomment #} {% extends 'base.html' %} {# mytitle employé 2 x #} {% block header %}
+<h1> {% block title %} Title dans local justindex - localTitle inline {% endblock %} Posts header block
+</h1>
+{% endblock %} {% block content %}
+<h1>{% block mytitle %} Welcome to FlaskBlog (child H1 header,softcoded) {% endblock %}</h1>
+{% for n in [2,4,16] %}
+<div class="flash">n = {{n}}</div>
+{% endfor %}
 
-{% block header %}
-  <h1>  {% block title %}
-            Title dans local justindex - localTitle inline
-    {% endblock %}
-    Posts  header block
-  </h1>
-{% endblock %}
-
-{% block content %}
-  {% for n in [2,4,16] %}
-    <div class="flash">n = {{n}}</div>
-  {% endfor %}
-{% endblock %}
-
+<hr> {% for post in posts %}
+<a href="{{ url_for('post', post_id=post['id']) }}">
+    <h2>{{ post['title'] }}</h2>
+</a>
+<span class="badge badge-primary">{{ post['created'] }}</span>
+<a href="{{ url_for('edit', id=post['id']) }}">
+    <span class="badge badge-warning">Edit</span>
+</a>
+<hr> {% endfor %} {% endblock %}
