@@ -26,4 +26,3 @@ EXPOSE 80
 
 CMD [ "/usr/local/bin/poetry", "run", "flask", "run", "--host", "0.0.0.0", "--port", "80" ]
 
-CMD echo hello from docker
