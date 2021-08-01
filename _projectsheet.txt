@@ -1,0 +1,436 @@
+Tuto:
+    Comment créer une application web en utilisant Flask en Python 3
+    https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3-fr
+
+Local folder :
+    Projets/tuto_flask_blog2
+    /home/pydsuperu/
+
+
+DigOcean: PERIME
+    https://cloud.digitalocean.com/projects/4a758699-5165-4699-913f-1a7770f7d472/resources?i=b6b507
+    2021-04-flaskblog1  in  Hello World 20210414
+    ipv4: 104.248.93.7      Private IP:  10.110.0.2
+
+http://104.248.93.7/        setup
+    app URLs look like? : http://2021-04-flaskblog1:<app-port>
+
+
+=====================================================
+==================Projets/tuto_flask_blog2===================================
+Sous-Projets
+==============
+cabwill :
+Projets/tuto_flask_blog2/
+    cabwill_1.sh
+    cabwill_1.py ( FLASK_APP )
+    cabwill.db
+    /static/
+        CSS ...
+    /templates/
+        base.html, .... zzz
+        /cabwill/
+            cabwill_base1.htm
+            pagestree.htm
+            base_cw.htm .... zzz
+            /pages/
+                1.htm.bak
+                HistRchch.htm
+    
+ PIN        876-414-307   
+|bad request|abort(400)||unauthenticated|abort(401)||forbiddden|abort(403)||not found|abort(404)||not acceptable|abort(406)||unsupported media type|abort(415)||server is to busy|abort(401)
+
+    
+
+=====================================================
+                    testing SQLAlchemy
+
+=====================================================
+testalchemy1.py     small
+    https://pypi.org/project/Flask-SQLAlchemy/
+
+FlaskSQLAlchemy.py     more
+    https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/#a-minimal-application
+
+
+=====================================================
+                    SQL for Tree
+
+=====================================================
+
+WITH CT(id, pid, lvl, srt, pgName) AS (
+    SELECT ID_Page, ParentPage_Id, 0, PgSort, TxtID_Page
+      FROM PagesTreeTT1
+     WHERE ParentPage_Id IS NULL
+    UNION ALL
+    SELECT ID_Page, ParentPage_Id, lvl+1, PgSort, TxtID_Page
+      FROM CT
+      JOIN PagesTreeTT1 AS P
+     WHERE P.ParentPage_Id = CT.id LIMIT 1000
+)
+SELECT *
+  FROM CT
+;
+
+SELECT ID_Page, ParentPage_Id, lvl+1, PgSort, TxtID_Page
+      FROM CT
+      JOIN PagesTreeTT1 AS P
+     WHERE P.ParentPage_Id = CT.id LIMIT 1000
+
+SELECT ID_Page, ParentPage_Id, lvl+1, PgSort, TxtID_Page
+      FROM PagesTreeTT1
+      JOIN PagesTreeTT1 AS P
+     WHERE P.ParentPage_Id = PagesTreeTT1.id LIMIT 1000
+;
+
+SELECT ID_Page, ParentPage_Id, 1, PgSort, TxtID_Page
+      FROM PagesTreeTT1
+      JOIN PagesTreeTT1 AS P
+     WHERE P.ParentPage_Id = PagesTreeTT1.id LIMIT 1000
+;
+SELECT ID_Page, ParentPage_Id, PgSort, TxtID_Page
+      FROM PagesTreeTT1
+      JOIN PagesTreeTT1 AS P
+     WHERE P.ParentPage_Id = PagesTreeTT1.ID_Page LIMIT 1000
+;
+==========================  ok
+SELECT PagesTreeTT1.ID_Page, PagesTreeTT1.ParentPage_Id, PagesTreeTT1.PgSort, PagesTreeTT1.TxtID_Page
+      FROM PagesTreeTT1
+      JOIN PagesTreeTT1 AS P
+     WHERE P.ParentPage_Id = PagesTreeTT1.ID_Page LIMIT 1000
+;
+
+==========================  ok
+SELECT ID_Page, ParentPage_Id, 0, PgSort, TxtID_Page
+      FROM PagesTreeTT1
+     WHERE ParentPage_Id IS NULL
+     
+     
+https://www.sqlite.org/lang_with.html       3.2. Hierarchical Query Examples
+WITH RECURSIVE
+  works_for_alice(n) AS (
+    VALUES('Alice')
+    UNION
+    SELECT name FROM org, works_for_alice
+     WHERE org.boss=works_for_alice.n
+  )
+SELECT name FROM org
+ WHERE org.name IN works_for_alice;
+
+
+
+better:
+3.4. Controlling Depth-First Versus Breadth-First Search Of a Tree Using ORDER BY
+ORDER BY to be DESC for having 'DESC', for a a depth-first search:
+
+WITH RECURSIVE
+  under_alice(name,level) AS (
+    VALUES('Alice',0)
+    UNION ALL
+    SELECT org.name, under_alice.level+1
+      FROM org JOIN under_alice ON org.boss=under_alice.name
+     ORDER BY 2 DESC
+  )
+SELECT substr('..........',1,level*3) || name FROM under_alice;
+
+transpose to PagesTreeTT1 :
+
+WITH RECURSIVE
+  under_root(ID_Page,level) AS (
+    VALUES('root',0)  
+    UNION ALL
+    SELECT PagesTreeTT1.ID_Page, under_root.level+1
+      FROM PagesTreeTT1 JOIN under_root ON PagesTreeTT1.ParentPage_Id=under_root.ID_Page
+     ORDER BY 2 DESC
+  )
+SELECT substr('..........',1,level*3) || ID_Page FROM under_root
+;
+
++--------------------------------------------+
+| substr('..........',1,level*3) || ID_Page |
++--------------------------------------------+
+| root                                       |
++--------------------------------------------+
+
+WITH RECURSIVE
+  under_root(ID_Page,level) AS (
+    VALUES('root',0)  
+    UNION ALL
+    SELECT PagesTreeTT1.ID_Page, under_root.level+1
+      FROM PagesTreeTT1 JOIN under_root ON PagesTreeTT1.ParentPage_Id=under_root.ID_Page
+     ORDER BY 2 DESC
+  )
+SELECT substr('..........',1,level*3) || ID_Page FROM under_root
+;
++--------------------------------------------+
+| substr('..........',1,level*3) || ID_Page |
++--------------------------------------------+
+| 2                                          |
+| ...4                                       |
+| ...5                                       |
+| ...6                                       |
+| ...7                                       |
+| ......9                                    |
+| ......10                                   |
+| ......11                                   |
++--------------------------------------------+
+8 rows in set (0.00 sec)
+
+
+now replace VALUES by a SELECT statement first level
+
+(SELECT
+	PagesTreeTT1.ID_Page 
+FROM
+	PagesTreeTT1 
+WHERE
+	PagesTreeTT1.ParentPage_Id ISNULL)
+
+
+NON : trop de parenthèses:
+WITH RECURSIVE
+  under_root(ID_Page,level) AS (
+    (SELECT
+	PagesTreeTT1.ID_Page 
+FROM
+	PagesTreeTT1 
+WHERE
+	PagesTreeTT1.ParentPage_Id ISNULL)  
+    UNION ALL
+    SELECT PagesTreeTT1.ID_Page, under_root.level+1
+      FROM PagesTreeTT1 JOIN under_root ON PagesTreeTT1.ParentPage_Id=under_root.ID_Page
+     ORDER BY 2 DESC
+  )
+SELECT substr('..........',1,level*3) || ID_Page FROM under_root
+;
+
+
+WITH RECURSIVE
+  under_root(ID_Page,level) AS (
+    SELECT
+	PagesTreeTT1.ID_Page, 0 
+FROM
+	PagesTreeTT1 
+WHERE
+	PagesTreeTT1.ParentPage_Id ISNULL  
+    UNION ALL
+    SELECT PagesTreeTT1.ID_Page, under_root.level+1
+      FROM PagesTreeTT1 JOIN under_root ON PagesTreeTT1.ParentPage_Id=under_root.ID_Page
+     ORDER BY 2 DESC
+  )
+SELECT substr('..........',1,level*3) || ID_Page FROM under_root
+;
+
+  (:-/)       table under_root has 1 values for 2 columns
+
+PageTreeTT1_TreeVw02 :
+WITH RECURSIVE
+  under_root(ID_Page,level, lbl,slug,OnOff) AS (
+    SELECT
+	PagesTreeTT1.ID_Page, 0, PagesTreeTT1.PgDescr, PagesTreeTT1.TxtID_Page, PagesTreeTT1.OnOff
+FROM 	PagesTreeTT1
+WHERE PagesTreeTT1.ParentPage_Id ISNULL  AND PagesTreeTT1.OnOff = 1
+    UNION ALL
+    SELECT PagesTreeTT1.ID_Page, under_root.level+1, PagesTreeTT1.PgDescr, PagesTreeTT1.TxtID_Page, PagesTreeTT1.OnOff
+      FROM PagesTreeTT1 JOIN under_root ON PagesTreeTT1.ParentPage_Id=under_root.ID_Page
+			WHERE PagesTreeTT1.OnOff = 1
+     ORDER BY 2 DESC
+  )
+SELECT (substr('..........',1,level*3) || lbl) as BranchString, slug FROM under_root
+
+29/07/2021 12:18:24
+PageTreeTT1_TreeVw02a : 
+
+WITH RECURSIVE
+  under_root(ID_Page,level, lbl,slug, sort, OnOff,parid) AS (
+    SELECT
+	PagesTreeTT1.ID_Page, 0, PagesTreeTT1.PgDescr, PagesTreeTT1.TxtID_Page, PagesTreeTT1.PgSort, PagesTreeTT1.OnOff, PagesTreeTT1.ParentPage_Id
+FROM 	PagesTreeTT1
+WHERE PagesTreeTT1.ParentPage_Id ISNULL  AND PagesTreeTT1.OnOff = 1
+    UNION ALL
+    SELECT PagesTreeTT1.ID_Page, under_root.level+1, PagesTreeTT1.PgDescr, PagesTreeTT1.TxtID_Page, PagesTreeTT1.PgSort, PagesTreeTT1.OnOff, PagesTreeTT1.ParentPage_Id
+      FROM PagesTreeTT1 JOIN under_root ON PagesTreeTT1.ParentPage_Id=under_root.ID_Page
+			WHERE PagesTreeTT1.OnOff = 1
+     ORDER BY 2 DESC
+  )
+SELECT (substr('..........',1,level*3) || lbl || '  ' || ID_Page || ' \< ' || parid ) as BranchString, slug, sort FROM under_root
+
+PageTreeTT1_TreeVw02b :
+WITH RECURSIVE under_root ( ID_Page, level, lbl, slug, sort, OnOff,parid ) AS (
+	SELECT
+		PagesTreeTT1.ID_Page,
+		0,
+		PagesTreeTT1.PgDescr,
+		PagesTreeTT1.TxtID_Page,
+		PagesTreeTT1.PgSort,
+		PagesTreeTT1.OnOff,PagesTreeTT1.ParentPage_Id 
+	FROM
+		PagesTreeTT1 
+	WHERE
+		PagesTreeTT1.ParentPage_Id ISNULL 
+		AND PagesTreeTT1.OnOff = 1 UNION ALL
+	SELECT
+		PagesTreeTT1.ID_Page,
+		under_root.level + 1,
+		PagesTreeTT1.PgDescr,
+		PagesTreeTT1.TxtID_Page,
+		PagesTreeTT1.PgSort,
+		PagesTreeTT1.OnOff,PagesTreeTT1.ParentPage_Id 
+	FROM
+		PagesTreeTT1
+		JOIN under_root ON PagesTreeTT1.ParentPage_Id = under_root.ID_Page 
+	WHERE
+		PagesTreeTT1.OnOff = 1 
+	ORDER BY
+		2 DESC 
+	) SELECT
+	( substr( '..........', 1, level * 3 ) || lbl || '  ' || ID_Page ) AS BranchString,
+	slug,
+	sort , parid
+FROM
+	under_root;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=====================================================
+                        cabwill
+
+=====================================================
+
+Navigation
+
+    Histoire d'une recherche
+        Trouver un lieu
+        Gedinne - et rien d'autre
+        J'ai trouvé
+        ...
+    Découverte
+        mmm
+        nnnn
+        Sous la Forge - Copinette-
+
+    Inauguration
+    Un chantier?
+    Et autour de ce site
+    Infos utiles
+        Willerzie (village)
+        Gedinne (Commune)
+        Hébergements
+        Commerces
+        Services
+        Vie locale et régionale
+            Socio-économie
+            Culturel
+            Politique
+        Patrimoine
+        Nature
+    A propos
+
+
+PagesTreeTT1_b.PgSort &"-" & PagesTreeTT1_a.PgSort & "-" & PagesTreeTT1.PgSort
+
+	cast(PagesTreeTT1_b.PgSort) || cast(PagesTreeTT1_a.PgSort) || cast(PagesTreeTT1.PgSort)
+
+
+
+<!-- """Bootstrap CSS  "{{ url_for('static', filename='css/planets.css') }}" "{{ url_for('static', filename='CSS/bootstrap.css') }}"  """ --> 
+
+    <link rel="stylesheet" href="../../../static/CSS/bootstrap.css">
+    <link rel="stylesheet" href="../../../static/CSS/custom.css">
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="custom.css">
+        
+    
+========================================
+Histoire d'une recherche
+---------------
+Printemps 2019. J'occupe un petit studio (23 m²) sous une charpente du domaine dit Moulin Al Poudre, à 200 m de mon chantier "de Bau": la maison que je termine de rénover en maison très basse énergie dans le village de Blanmont (Commune de Chastre, BW).
+Besoin d'espace, pas tant d'espace habitable que de larges vues sur la nature.
+
+Le Sud de la France ou la Belgique du Sud? 
+Bien sûr, je suis déjà assidu à la la région de Barcelonnette ( Alpes-de-Haute-Provence )
+https://fr.wikipedia.org/wiki/Barcelonnette
+qui m'a déjà offert tant d'horizons, de rencontres, de neige et de soleil. Déjà j'ai décidé d'y retourner souvent.
+Mais c'est loin. Et le COVID ne facilite rien sur ce plan-là.
+
+Ce sera "le Sud de la Belgique ET Barcelonette"
+En Belgique ce sera un lieu 'à moi'.
+
+Je rêve d'acquérir un terrain, de construire ou acquérir une maisonnette, en bois de préférence.
+Mon imaginaire vogue entre les hébergements testés et observés en France:  Habitat Léger, caravane résidentielle, maison isolée, ancienne grange à rénover, camping-car, mobilhome, chalet, Tiny House évidemment. J'ai fait 2 ou 3 week-ends en 'chalet' au camping d'Ave-et-Auffe. J'aimais beaucoup.
+
+Où aller?
+Directement vers le Sud: voyons au Sud de Namur (au Sud-Est,l'Outre-Liège, Spa, les Fagnes,etc, c'est trop loin).
+La carte Michelin d'abord: jusqu'où faut-il descendre pour trouver les premières zones forestières d'ampleur suffisante? Entre Namur et Dinant, c'est encore très habité: uniquement des petites forêts. 
+Voyons un peu plus bas ...
+... Beauraing, je ne connais pas du tout. Ha, tiens! c'est entre l'E411 et la botte de Givet. Chouette. Pas loin de Couvin, du Viroin, région que j'aime beaucoup. Mais restons sur l'axe de l'E411, pas trop près quand-même.
+ Wellin,...,Redu,..., Daverdisse, la Lesse. Ah, la RN95 vers Bouillon. Non, çà c'est trop loin, et la Semois, tant de fois parcourue, c'est souvent encaissé.
+ Allez, on zoome sur le sud de Beauraing : G E D I N N E   !
+ Zoom avec la carte IGN 50.000° d'abord: de la forêt, encore et encore, des tout petis villages le long de la frontière: un peu le bout du monde: il y a très peu de passages ves la France, et c'est pratiquement désert de l'autre côté de la frontière.
+ C'est la région de la Famenne-Ardenne : mélange de grands plateaux et de forêts.
+ Il ne reste qu'à trouver un lieu à l'abri du bruit des voitures, ou en tout cas du bruit du trafic rapide: c'est mon critère prioritaire.
+ 
+ Google search - agences immobilières - Immoweb - VivaStreet - Trovit - Notaires - Géomètres;
+ emails - coups de fils - infos urbanistiques;
+ Bref : de la télé-prospection, qui sera de plus en plus intensive.
+
+Fin juin 2019: premières escapades en prospection dans la région. J'y passerai de nombreux week-ends, pendant 1 an.
+
+Tous les villages de Gedinne y passeront: XXX . Et autour de Gedinne, la majorité des villages de Bièvre, Daverdisse, et les villages au Sud de Beauraing. Un détour en France : XXX 
+
+2 avant-projets XXXXX
+
+
+
+
+
+<!-- 
+
+
+
+
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    

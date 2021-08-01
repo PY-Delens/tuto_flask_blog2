@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    {% block head %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../static/CSS/bootstrap.css">
+    <link rel="stylesheet" href="../static/CSS/custom.css">
+    <title>{% block mytitle %}- °(base's default) block title° Flaskr{% endblock %}</title>{% endblock %}
+</head>
+
+<body>
+    <nav>
+        <h1>navnav :</h1> (from BaseTPL)
+        <ul>
+            <li><span>blaaaasssss</span>
+                <li><a>bleeeeeeekkkkkkkkkkk</a>
+        </ul>
+    </nav>
+
+    <section class="content">
+        <header>
+            <h1> {{ self.title() }}-- header H1 suffix, hardcoded from base</h1>
+            global parent header just before child's content block <br/> self.title() : coded in base but var coming from justindex(self)
+        </header>
+    </section>
+    <div id="content" class="container">
+        qqqqqqqqqqqq from base-cw {% for message in get_flashed_messages() %}
+        <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %} {% block content %} and here the (base's default) content {% endblock %}
+    </div>
+</body>
+
+</html>

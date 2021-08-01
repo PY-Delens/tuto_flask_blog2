@@ -1,0 +1,19 @@
+<html>
+<head>
+		<title>Just The Tree</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head><body> 
+{# comment 
+              {% for n in [2,4,16] %}
+                    <div class="flash">n = {{n}} aaa</div>
+                {% endfor %}
+              <hr> 
+              cleverfunction()  : {{ cleverfunction() }}
+comment #}
+
+<hr> 
+{% for item in maketree4()  %}
+  <a href="/item[Slug]">  {{ item['BranchString'] }}</a> [|.|]
+  <br> 
+{% endfor %}
+</body></html>

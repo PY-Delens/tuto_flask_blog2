@@ -1,15 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    
     <!-- Required meta tags -->
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
+    <link rel="stylesheet" href="/home/pydsuperu/Projets/tuto_flask_blog2/node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/home/pydsuperu/Projets/tuto_flask_blog2/node_modules/bootstrap/dist/css/custom.css">
+    <title>Hello, Willerzie!</title>
     <style>
         /*The grid; 100% viewport height; */
         
@@ -19,7 +18,8 @@
             grid-template-columns: 200px 1fr 200px;
             grid-template-rows: auto 1fr auto;
             grid-gap: 10px;
-            height: 100vh;
+            /*height: 100vh;*/
+            background-color: lightcyan;
         }
         /*Grid items*/
         
@@ -28,24 +28,30 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background-color: lightgoldenrodyellow;
         }
         
         nav {
             grid-area: nav;
             margin-left: 0.5rem;
+            background-color: lightgreen;
         }
         
         main {
             grid-area: content;
+            background-color: lightsalmon;
+            height: 50vh;
         }
         
         aside {
             grid-area: side;
             margin-right: 0.5rem;
+            background-color: lightseagreen;
         }
         
         footer {
             grid-area: footer;
+            background-color: burlywood;
         }
         /*Responsive - collapse everything into one column on smaller devices*/
         
@@ -67,72 +73,71 @@
         }
         /*Grid and Flexbox*/
     </style>
-
-</head>
-
-<body>
-    <h1>Hello, world!</h1>
-
-    <div class="container">
-        <header>
-            <!-- Header content -->
-            Header content
-        </header>
-
-        <nav>
-            <!-- Navigation -->
-            Navigation
-        </nav>
-
-        <main>
-            <!-- Main content -->
-            Main content
-        </main>
-
-        <aside>
-            <!-- Sidebar / AdsSidebar / Ads -->
-            Sidebar / Ads
-        </aside>
-
-        <footer>
-            <!-- Footer content -->
-            Footer content
-        </footer>
+  </head>
+  <body>
+    <div class="container min-vh-100">
+      <hr>
+      <header>
+        <!-- Header content --> [Header content] Accueil Nouvelles Contact </header>
+      <nav>
+        <!-- Navigation --> Navigation <br>
+        <ul>
+          <li>Histoire d'une recherche </li>
+          <ul>
+            Trouver un lieu
+            
+<li>Gedinne - et rien d'autre</li>
+            J'ai trouvé
+            
+<li>...</li>
+          </ul>
+          <li>Découverte</li>
+          <ul>
+            <li>mmm</li>
+            <li>nnnn</li>
+            <li>Sous la Forge - Copinette- </li>
+            <li><br>
+            </li>
+          </ul>
+          <li>Inauguration </li>
+          <li>Un chantier?</li>
+          <li>Et autour de ce site</li>
+          <li>Infos utiles </li>
+          <ul>
+            <li>Willerzie (village)</li>
+            <li>Gedinne (Commune)</li>
+            <li>Hébergements</li>
+            <li>Commerces</li>
+            <li>Services</li>
+            <li>Vie locale et régionale</li>
+            <ul>
+              <li>Socio-économie</li>
+              <li>Culturel</li>
+              <li>Politique</li>
+            </ul>
+            <li>Patrimoine</li>
+            <li>Nature</li>
+          </ul>
+          <li> A propos</li>
+        </ul>
+      </nav>
+      <main>
+        <!-- Main content --> Main content
+        <h1>Hello, Willerzie!</h1>
+        <hr>
+        <h1>Level1header Hello, big world!</h1>
+        <h3>Level3header try scss - should be cyan from custom[s]css</h3>
+        <h4>Level4header try scss</h4>
+        @Kevlar Why? Accepting is used to mark not always "the best" answers, but the one that worked out for OP (read FAQ for more information). At a time of asking question above answer wouldn't work (wouldn't even existed), as git was way earlier than 1.8. Accepted answer however did worked out for OP. What reason to you find for changing OP's decision after three years? – trejder Dec 6 '13 at 10:26<br>é&amp;'èàù$µ§</main>
+      <aside>
+        <!-- Sidebar / AdsSidebar / Ads --> Sidebar / Ads </aside>
+      <hr>
+      <footer>
+        <!-- Footer content --> Footer content </footer>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-</body>
-
-</html>
+</body></html>

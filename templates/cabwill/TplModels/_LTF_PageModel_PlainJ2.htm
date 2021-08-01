@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% extends '/cabwill/cabwill_base1.htm' %}        <!-- cabwill_base1.htm | cabwill/base_cw.htm -->
+
+
+<html lang="fr">        <!-- only for local plain html debugging -->
+
+<head>      <!-- only for local plain html debugging, normally only fallback 'this.onerror' is useful, but some pages could need to be served by Flask but in standalone without holygrail, so let us secure for 2 =/= TPLs -->
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+<link rel="stylesheet" href="{{ url_for('static', filename='CSS/bootstrap.css') }}" onerror="this.onerror=null;this.href='../../../static/CSS/bootstrap.css';" />
+<link rel="stylesheet" href="{{ url_for('static', filename='CSS/custom.css') }}" onerror="this.onerror=null;this.href='../../../static/CSS/custom.css';" />
+     <title>{% block mytitle %}  Histoire d'une recherche {% endblock mytitle%} </title>
+</head>
+{% block header %}
+    <H1>{{ self.mytitle() }}</H1>
+{% endblock header %} 
+
+{% block content %}
+
+
+Histoire d'une recherche
+---------------
+<p>Printemps 2019. J'occupe un petit studio (23 m²) sous une charpente du domaine dit Moulin Al Poudre, à 200 m de mon chantier "de Bau": la maison que je termine de rénover en maison très basse énergie dans le village de Blanmont (Commune de Chastre, BW)<br>
+Besoin d'espace, pas tant d'espace habitable que de larges vues sur la nature.</p>
+<p>Le Sud de la France ou la Belgique du Sud? 
+Bien sûr, je suis déjà assidu à la la région de Barcelonnette ( Alpes-de-Haute-Provence )
+https://fr.wikipedia.org/wiki/Barcelonnette
+qui m'a déjà offert tant d'horizons, de rencontres, de neige et de soleil. Déjà j'ai décidé d'y retourner souvent<br>
+Mais c'est loin. Et le COVID ne facilite rien sur ce plan-là.</p>
+<p>Ce sera "le Sud de la Belgique ET Barcelonette"
+En Belgique ce sera un lieu 'à moi'.</p>
+
+<p>Je rêve d'acquérir un terrain, de construire ou acquérir une maisonnette, en bois de préférence<br>
+Mon imaginaire vogue entre les hébergements testés et observés en France:  Habitat Léger, caravane résidentielle, maison isolée, ancienne grange à rénover, camping-car, mobilhome, chalet, Tiny House évidemment. J'ai fait 2 ou 3 week-ends en 'chalet' au camping d'Ave-et-Auffe. J'aimais beaucoup.</p>
+<p>Où aller?
+Directement vers le Sud: voyons au Sud de Namur (au Sud-Est,l'Outre-Liège, Spa, les Fagnes,etc, c'est trop loin)<br>
+La carte Michelin d'abord: jusqu'où faut-il descendre pour trouver les premières zones forestières d'ampleur suffisante? Entre Namur et Dinant, c'est encore très habité: uniquement des petites forêts. 
+Voyons un peu plus bas ..<br>
+... Beauraing, je ne connais pas du tout. Ha, tiens! c'est entre l'E411 et la botte de Givet. Chouette. Pas loin de Couvin, du Viroin, région que j'aime beaucoup. Mais restons sur l'axe de l'E411, pas trop près quand-même<br>
+ Wellin,...,Redu,..., Daverdisse, la Lesse. Ah, la RN95 vers Bouillon. Non, çà c'est trop loin, et la Semois, tant de fois parcourue, c'est souvent encaissé<br>
+ Allez, on zoome sur le sud de Beauraing : G E D I N N E   !
+ Zoom avec la carte IGN 50.000° d'abord: de la forêt, encore et encore, des tout petis villages le long de la frontière: un peu le bout du monde: il y a très peu de passages ves la France, et c'est pratiquement désert de l'autre côté de la frontière<br>
+ C'est la région de la Famenne-Ardenne : mélange de grands plateaux et de forêts<br>
+ Il ne reste qu'à trouver un lieu à l'abri du bruit des voitures, ou en tout cas du bruit du trafic rapide: c'est mon critère prioritaire<br>
+ 
+ Google search - agences immobilières - Immoweb - VivaStreet - Trovit - Notaires - Géomètres;
+ emails - coups de fils - infos urbanistiques;
+ Bref : de la télé-prospection, qui sera de plus en plus intensive.</p>
+<p>Fin juin 2019: premières escapades en prospection dans la région. J'y passerai de nombreux week-ends, pendant 1 an.</p>
+<p>Tous les villages de Gedinne y passeront: XXX . Et autour de Gedinne, la majorité des villages de Bièvre, Daverdisse, et les villages au Sud de Beauraing. Un détour en France : XXX </p>
+<p>2 avant-projets XXXXX</p>
+
+{% endblock content %}
+
+under content block, in local 111
+</HTML>     <!-- only for local plain html debugging -->
+

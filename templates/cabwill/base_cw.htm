@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+{% block head %}
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <!-- Required meta tags -->
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../static/CSS/bootstrap.css">
+    <link rel="stylesheet" href="../../static/CSS/custom.css">
+    <title>
+      {% block mytitle %}
+      	- (base's default) block title 
+      {% endblock mytitle%}
+    </title>
+{% endblock head%}
+</head>
+
+<body>
+
+<nav>
+<h1>navnav :</h1> (from BaseTPL)     
+
+  <ul>
+    <li><span>blaaaasssss</span></li>
+    <li><a>bleeeeeeekkkkkkkkkkk</a></li>
+  </ul>
+</nav>
+
+<section class="content">
+        <header>
+            <h1> {{ self.mytitle() }}-- header H1 suffix, first part hardcoded from base</h1>
+            global parent header just before child's content block <br> self.title() : coded in base but var coming from justindex(self)
+        </header>
+
+</section>
+
+<div id="content" class="container">
+{% block content %}
+    and here the (base's default) content 
+    qqqqqqqqqqqqrrrr from base-cw 
+    <BR>
+    {% for message in get_flashed_messages() %}
+         <div class="alert alert-danger">
+            {{ message }}
+         </div>
+    {% endfor %} 
+    <BR>
+{% endblock content %}
+parent's just below content block in div
+</div> <!-- id="content" -->
+</body>
+</html>
