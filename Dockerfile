@@ -7,11 +7,12 @@ RUN pip install poetry
 ADD pyproject.toml poetry.lock hello.py hello2.py just.py /app/
 ADD cabwill.db cabwill_1.py /app/
 
-COPY helloblog.py schema.sql init_db.py database.db sqlite3 cabwill.db cabwill_1.py /app/
+#  schema.sql init_db.py sqlite3
+COPY helloblog.py database.db cabwill.db cabwill_1.py /app/
 COPY static/ /app/static/
 COPY templates/ /app/templates/
 
-ADD test.txt /app/test.txt
+# ADD test.txt /app/test.txt
 
 RUN poetry install
 RUN  ls -la /app/templates/*
