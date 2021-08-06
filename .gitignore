@@ -1,3 +1,9 @@
-/BAK-Ignored
-/OldStuff-Ignored
+/Ignor_BAK
+/Ignor_CodeTesting
+/Ignor_OldStuff
+/Ignor_ProjectMngmnt
+/node_modules
+/__pycache__
+/.vscode
+_projectsheet.txt
 

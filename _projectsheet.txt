@@ -25,6 +25,7 @@ Projets/tuto_flask_blog2/
     cabwill_1.sh
     cabwill_1.py ( FLASK_APP )
     cabwill.db
+    tuto_flask_blog2.db
     /static/
         CSS ...
     /templates/
